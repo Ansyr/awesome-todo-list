@@ -23,9 +23,9 @@ export const useFilteredTodos = (todos: Todo[]) => {
     if (selectedFilter === "all") {
       return searchedTodos;
     } else if (selectedFilter === "unсompleted") {
-      return [...searchedTodos].filter((todo) => !todo.completed);
+      return searchedTodos.filter((todo) => !todo.completed);
     } else if (selectedFilter === "completed") {
-      return [...searchedTodos].filter((todo) => todo.completed);
+      return searchedTodos.filter((todo) => todo.completed);
     }
   }, [searchedTodos, selectedFilter]);
 

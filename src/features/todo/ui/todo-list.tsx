@@ -8,6 +8,7 @@ import { useFilteredTodos } from "../model/use-filtered-todos.ts";
 
 export const TodoList = () => {
   const { todos, toggleTodo } = useTodos();
+  // Плохая абстракция как будто
   const {
     filteredTodos,
     selectedFilter,

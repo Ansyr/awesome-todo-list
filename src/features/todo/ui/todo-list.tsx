@@ -8,9 +8,13 @@ import { useFilteredTodos } from "../model/use-filtered-todos.ts";
 
 export const TodoList = () => {
   const { todos, toggleTodo } = useTodos();
-  const { filteredTodos, selectedFilter, changeFilter } =
-    useFilteredTodos(todos);
-  const [searchText, setSearchText] = useState("");
+  const {
+    filteredTodos,
+    selectedFilter,
+    searchedText,
+    changeSearchedText,
+    changeFilter,
+  } = useFilteredTodos(todos);
   const [sortBy, setSortBy] = useState<SortTodo>("alphabet");
 
   const sortedTodos = useMemo(() => {
@@ -28,8 +32,8 @@ export const TodoList = () => {
     <div className={"p-4 flex flex-col gap-2"}>
       <Input placeholder={"add todo"} />
       <Input
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
+        value={searchedText}
+        onChange={(e) => changeSearchedText(e.target.value)}
         placeholder={"find todos"}
       />
       <TodoListFilters

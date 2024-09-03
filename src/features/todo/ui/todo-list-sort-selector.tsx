@@ -1,9 +1,4 @@
-import {
-  FILTERS_TODO,
-  FilterTodo,
-  SORTERS_TODO,
-  SortTodo,
-} from "../domain/domain.ts";
+import { SORTERS_TODO, SortTodo } from "../domain/domain.ts";
 import { DropdownMenu } from "@/shared/ui/dropdown-menu.tsx";
 import {
   DropdownMenuContent,
@@ -14,7 +9,7 @@ import {
 } from "@/shared/ui/dropdown-menu.tsx";
 import { Button } from "../../../shared/ui/button.tsx";
 
-export const TodoListSorter = ({
+export const TodoListSortSelector = ({
   sortBy,
   onChangeSort,
 }: {
@@ -24,7 +19,9 @@ export const TodoListSorter = ({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">Фильтрация : {SORTERS_TODO[sortBy]}</Button>
+        <Button variant="outline">
+          Сортировка по : {SORTERS_TODO[sortBy]}
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuSeparator />

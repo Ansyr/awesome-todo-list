@@ -1,14 +1,19 @@
-import { Checkbox } from "../../../shared/ui/checkbox.tsx";
-import { Input } from "../../../shared/ui/input.tsx";
+import { Checkbox } from "@/shared/ui/checkbox.tsx";
+import { Input } from "@/shared/ui/input.tsx";
 import { useTodos } from "../model/use-todos.ts";
 import { useMemo, useState } from "react";
 import { SortTodo } from "../domain/domain.ts";
-import { TodoListFilters } from "./todo-list-filters.tsx";
+import { TodoListFilterSelector } from "./todo-list-filter-selector.tsx";
 import { useFilteredTodos } from "../model/use-filtered-todos.ts";
+import { TodoItem } from "./todo-item.tsx";
+import { Button } from "@/shared/ui/button.tsx";
+import { TrashIcon } from "@radix-ui/react-icons";
+import { CreateTodoForm } from "./create-todo-form.tsx";
+import { TodoListSortSelector } from "./todo-list-sort-selector.tsx";
 
 export const TodoList = () => {
-  const { todos, toggleTodo } = useTodos();
-  // Плохая абстракция как будто
+  const { todos, toggleTodo, addTodo, deleteTodo } = useTodos();
+  // Плохая абстракция
   const {
     filteredTodos,
     selectedFilter,
@@ -16,6 +21,7 @@ export const TodoList = () => {
     changeSearchedText,
     changeFilter,
   } = useFilteredTodos(todos);
+
   const [sortBy, setSortBy] = useState<SortTodo>("alphabet");
 
   const sortedTodos = useMemo(() => {
@@ -31,33 +37,40 @@ export const TodoList = () => {
 
   return (
     <div className={"p-4 flex flex-col gap-2"}>
-      <Input placeholder={"add todo"} />
+      <CreateTodoForm onAddTodo={addTodo} />
       <Input
         value={searchedText}
         onChange={(e) => changeSearchedText(e.target.value)}
         placeholder={"find todos"}
       />
-      <TodoListFilters
+      <TodoListFilterSelector
         filterBy={selectedFilter}
         onChangeFilter={(val) => changeFilter(val)}
       />
+      <TodoListSortSelector
+        sortBy={sortBy}
+        onChangeSort={(sort) => setSortBy(sort)}
+      />
       {sortedTodos?.map((todo) => (
-        <div className="p-4 bg-gray-300 text-secondary text-lg border rounded-lg shadow-md">
-          <div className="flex justify-between items-center">
-            <div className="flex flex-col gap-2 w-full">
-              <p className="font-semibold">{todo.text}</p>
-              <div className="border-b border-secondary opacity-50" />
-              <p className="text-sm text-gray-500">
-                {new Date(todo.createdAt).toLocaleString()}
-              </p>
+        <TodoItem
+          todo={todo}
+          renderExtraAction={
+            <div className={"flex gap-2 items-center"}>
+              <Checkbox
+                onCheckedChange={() => toggleTodo(todo.id)}
+                className={"h-6 w-6"}
+                checked={todo.completed}
+              />
+              <Button
+                onClick={() => deleteTodo(todo.id)}
+                variant={"destructive"}
+                size="icon"
+              >
+                <TrashIcon />
+              </Button>
             </div>
-            <Checkbox
-              onCheckedChange={() => toggleTodo(todo.id)}
-              className={"h-6 w-6"}
-              checked={todo.completed}
-            />
-          </div>
-        </div>
+          }
+        />
       ))}
     </div>
   );

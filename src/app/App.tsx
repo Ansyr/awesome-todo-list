@@ -1,8 +1,6 @@
 import { Layout } from "../shared/ui/layout.tsx";
-import { TodoList } from "../features/todo/ui/todo-list.tsx";
+import { TodoList } from "@/features/todo";
 
-function App() {
+export const App = () => {
   return <Layout content={<TodoList />} />;
-}
-
-export default App;
+};

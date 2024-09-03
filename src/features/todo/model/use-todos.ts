@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Todo } from "../domain/domain.ts";
+import { createTodo, Todo } from "../domain/domain.ts";
 import { MOCK_TODOS } from "./mock.ts";
 
 export const useTodos = () => {
@@ -12,5 +12,14 @@ export const useTodos = () => {
     setTodos(updatedTodos);
   };
 
-  return { todos, toggleTodo };
+  const addTodo = (text: string) => {
+    const newTodo = createTodo(text);
+    setTodos((prev) => [...prev, newTodo]);
+  };
+
+  const deleteTodo = (id: string) => {
+    setTodos([...todos].filter((todo) => todo.id !== id));
+  };
+
+  return { todos, toggleTodo, addTodo, deleteTodo };
 };

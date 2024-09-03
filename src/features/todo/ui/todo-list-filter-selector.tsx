@@ -9,7 +9,7 @@ import {
 } from "@/shared/ui/dropdown-menu.tsx";
 import { Button } from "../../../shared/ui/button.tsx";
 
-export const TodoListFilters = ({
+export const TodoListFilterSelector = ({
   filterBy,
   onChangeFilter,
 }: {

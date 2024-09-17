@@ -43,13 +43,13 @@
       "id": "3ae29e77-cf4f-45e6-89b9-059105397e47",
       "text": "123",
       "createdAt": "2024-09-17T23:38:49.027Z",
-      "completed": false
+      "completed": true
     },
     {
       "id": "cdcd4005-3a07-4a1f-9635-41e2287ea8ad",
       "text": "ewq123",
       "createdAt": "2024-09-17T23:39:31.670Z",
-      "completed": false
+      "completed": true
     },
     {
       "id": "a75b8064-df08-4320-8d25-d7b527bbc571",

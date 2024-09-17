@@ -29,10 +29,7 @@ export const useTodos = () => {
     const updatedTodo = todos.find((todo) => todo.id === id);
 
     if (updatedTodo) {
-      await updateTodo(id, {
-        completed: !updatedTodo.completed,
-        text: updatedTodo?.text,
-      });
+      await updateTodo(id, updatedTodo);
       const updatedTodos = await getTodosList();
       setTodos(updatedTodos);
     }

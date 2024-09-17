@@ -2,10 +2,10 @@ import {
   addTodo,
   deleteTodoById,
   getTodos,
+  TodoDto,
   updateTodoById,
   UpdateTodoDto,
 } from "../../../shared/api/todos";
-import { generateUid } from "../../../shared/lib/uuid.ts";
 
 export const useTodosRepo = () => {
   const getTodosList = async () => {
@@ -25,13 +25,7 @@ export const useTodosRepo = () => {
     }
   };
 
-  const createTodo = async (text: string) => {
-    const todo = {
-      id: generateUid(),
-      text,
-      createdAt: new Date().toISOString(),
-      completed: false,
-    };
+  const createTodo = async (todo: TodoDto) => {
     await addTodo(todo);
   };
 

@@ -1,4 +1,4 @@
-import { FilterTodo, SortTodo, Todo } from "./domain.ts";
+import { FilterTodo, Todo } from "./domain.ts";
 import { useMemo } from "react";
 
 export const useFilteredTodos = ({
@@ -7,7 +7,6 @@ export const useFilteredTodos = ({
   searchedText,
 }: {
   todos: Todo[];
-  sortBy: SortTodo;
   selectedFilter: FilterTodo;
   searchedText: string;
 }) => {

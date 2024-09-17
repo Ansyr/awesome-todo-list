@@ -21,7 +21,6 @@ export const TodoList = () => {
   const { filteredTodos } = useFilteredTodos({
     selectedFilter: selectedFilter,
     searchedText: searchText,
-    sortBy,
     todos,
   });
   const { sortedTodos } = useSortedTodos({

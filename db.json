@@ -1,0 +1,61 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "a title",
+      "views": 100
+    },
+    {
+      "id": "2",
+      "title": "another title",
+      "views": 200
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "text": "a comment about post 1",
+      "postId": "1"
+    },
+    {
+      "id": "2",
+      "text": "another comment about post 1",
+      "postId": "1"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "todos": [
+    {
+      "completed": false,
+      "text": "zzxczc",
+      "createdAt": "2024-09-17T23:38:49.027Z",
+      "id": "37868fb9-2979-4b18-be6d-34121b7d5da6"
+    },
+    {
+      "completed": false,
+      "text": "zzxczc",
+      "createdAt": "2024-09-17T23:38:49.027Z",
+      "id": "5da962ae-b639-43e9-92d2-3ce8f24ffc18"
+    },
+    {
+      "id": "3ae29e77-cf4f-45e6-89b9-059105397e47",
+      "text": "123",
+      "createdAt": "2024-09-17T23:38:49.027Z",
+      "completed": false
+    },
+    {
+      "id": "cdcd4005-3a07-4a1f-9635-41e2287ea8ad",
+      "text": "ewq123",
+      "createdAt": "2024-09-17T23:39:31.670Z",
+      "completed": false
+    },
+    {
+      "id": "a75b8064-df08-4320-8d25-d7b527bbc571",
+      "text": "123",
+      "createdAt": "2024-09-17T23:39:32.507Z",
+      "completed": false
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import { FILTERS_TODO, FilterTodo } from "../domain/domain.ts";
+import { FILTERS_TODO, FilterTodo } from "../model/domain.ts";
 import { DropdownMenu } from "@/shared/ui/dropdown-menu.tsx";
 import {
   DropdownMenuContent,
@@ -9,7 +9,7 @@ import {
 } from "@/shared/ui/dropdown-menu.tsx";
 import { Button } from "../../../shared/ui/button.tsx";
 
-export const TodoListFilterSelector = ({
+export const TodoListFilter = ({
   filterBy,
   onChangeFilter,
 }: {

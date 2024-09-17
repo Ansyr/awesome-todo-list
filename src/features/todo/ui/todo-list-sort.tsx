@@ -1,4 +1,4 @@
-import { SORTERS_TODO, SortTodo } from "../domain/domain.ts";
+import { SORTERS_TODO, SortTodo } from "../model/domain.ts";
 import { DropdownMenu } from "@/shared/ui/dropdown-menu.tsx";
 import {
   DropdownMenuContent,
@@ -9,7 +9,7 @@ import {
 } from "@/shared/ui/dropdown-menu.tsx";
 import { Button } from "../../../shared/ui/button.tsx";
 
-export const TodoListSortSelector = ({
+export const TodoListSort = ({
   sortBy,
   onChangeSort,
 }: {

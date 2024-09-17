@@ -1,4 +1,4 @@
-import { Todo } from "../domain/domain.ts";
+import { Todo } from "../model/domain.ts";
 import { ReactNode } from "react";
 
 export const TodoItem = ({

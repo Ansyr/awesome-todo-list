@@ -1,25 +1,39 @@
-import { useState } from "react";
-import { createTodo, Todo } from "../domain/domain.ts";
-import { MOCK_TODOS } from "./mock.ts";
+import { useEffect, useState } from "react";
+import { useTodosRepo } from "./use-todos-repo.ts";
+import { Todo } from "./domain.ts";
 
 export const useTodos = () => {
-  const [todos, setTodos] = useState<Todo[]>(MOCK_TODOS);
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const { getTodosList, createTodo, deleteTodo, updateTodo } = useTodosRepo();
 
-  const toggleTodo = (id: string) => {
-    const updatedTodos = todos.map((todo) =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo,
-    );
+  const handleAddTodo = async (text: string) => {
+    await createTodo(text);
+    const updatedTodos = await getTodosList();
     setTodos(updatedTodos);
   };
 
-  const addTodo = (text: string) => {
-    const newTodo = createTodo(text);
-    setTodos((prev) => [...prev, newTodo]);
+  const handleDeleteTodo = async (id: string) => {
+    await deleteTodo(id);
+    const updatedTodos = await getTodosList();
+    setTodos(updatedTodos);
   };
 
-  const deleteTodo = (id: string) => {
-    setTodos([...todos].filter((todo) => todo.id !== id));
+  const handleToggleTodo = async (id: string) => {
+    const updatedTodo = todos.find((todo) => todo.id === id);
+
+    if (updatedTodo) {
+      await updateTodo(id, {
+        completed: !updatedTodo.completed,
+        text: updatedTodo?.text,
+      });
+      const updatedTodos = await getTodosList();
+      setTodos(updatedTodos);
+    }
   };
 
-  return { todos, toggleTodo, addTodo, deleteTodo };
+  useEffect(() => {
+    getTodosList().then((todos) => setTodos(todos));
+  }, []);
+
+  return { todos, handleAddTodo, handleDeleteTodo, handleToggleTodo };
 };

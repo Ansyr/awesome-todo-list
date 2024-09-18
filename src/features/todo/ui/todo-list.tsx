@@ -24,45 +24,57 @@ export const TodoList = () => {
     todos,
   });
   const { sortedTodos } = useSortedTodos({
-    todos: filteredTodos ?? todos,
+    todos: filteredTodos ?? [],
     sortBy: sortBy,
   });
 
   return (
-    <div className={"p-4 flex flex-col gap-2"}>
-      <CreateTodoForm onAddTodo={handleAddTodo} />
-      <Input
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-        placeholder={"find todos"}
-      />
-      <TodoListFilter
-        filterBy={selectedFilter}
-        onChangeFilter={(val) => setSelectedFilter(val)}
-      />
-      <TodoListSort sortBy={sortBy} onChangeSort={(sort) => setSortBy(sort)} />
-      {sortedTodos?.map((todo) => (
-        <TodoItem
-          key={todo.id}
-          todo={todo}
-          renderExtraAction={
-            <div className={"flex gap-2 items-center"}>
-              <Checkbox
-                onCheckedChange={() => handleToggleTodo(todo.id)}
-                className={"h-6 w-6"}
-                checked={todo.completed}
-              />
-              <Button
-                onClick={() => handleDeleteTodo(todo.id)}
-                variant={"destructive"}
-                size="icon"
-              >
-                <TrashIcon />
-              </Button>
-            </div>
-          }
+    <div className={"p-4 flex flex-col gap-2 w-full min-h-[800px]"}>
+      <div className="sticky top-0 bg-white z-10 p-2">
+        <CreateTodoForm onAddTodo={handleAddTodo} />
+        <Input
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          placeholder={"find todos"}
+          className="mt-2 mb-4"
         />
-      ))}
+        <div className="flex pt-2 flex-col sm:flex-row sm: gap-2 justify-between items-center">
+          <TodoListSort
+            sortBy={sortBy}
+            onChangeSort={(sort) => setSortBy(sort)}
+          />
+          <TodoListFilter
+            filterBy={selectedFilter}
+            onChangeFilter={(val) => setSelectedFilter(val)}
+          />
+        </div>
+      </div>
+      {sortedTodos.length === 0 ? (
+        <div className="text-gray-500">No todos found.</div>
+      ) : (
+        sortedTodos?.map((todo) => (
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            renderExtraAction={
+              <div className={"flex gap-2 items-center"}>
+                <Checkbox
+                  onCheckedChange={() => handleToggleTodo(todo.id)}
+                  className={"h-6 w-6"}
+                  checked={todo.completed}
+                />
+                <Button
+                  onClick={() => handleDeleteTodo(todo.id)}
+                  variant={"destructive"}
+                  size="icon"
+                >
+                  <TrashIcon />
+                </Button>
+              </div>
+            }
+          />
+        ))
+      )}
     </div>
   );
 };

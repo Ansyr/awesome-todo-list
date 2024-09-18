@@ -1,15 +1,10 @@
 import { FilterTodo, Todo } from "./domain.ts";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
-export const useFilteredTodos = ({
-  todos,
-  selectedFilter,
-  searchedText,
-}: {
-  todos: Todo[];
-  selectedFilter: FilterTodo;
-  searchedText: string;
-}) => {
+export const useFilteredTodos = (todos: Todo[]) => {
+  const [selectedFilter, setSelectedFilter] = useState<FilterTodo>("all");
+  const [searchedText, setSearchedText] = useState("");
+
   const searchedTodos = useMemo(
     () =>
       todos.filter((todo) => todo.text.toLowerCase().includes(searchedText)),
@@ -26,5 +21,19 @@ export const useFilteredTodos = ({
     }
   }, [searchedTodos, selectedFilter]);
 
-  return { filteredTodos };
+  const changeFilter = (filter: FilterTodo) => {
+    setSelectedFilter(filter);
+  };
+
+  const changeSearchText = (text: string) => {
+    setSearchedText(text);
+  };
+
+  return {
+    filteredTodos,
+    changeFilter,
+    changeSearchText,
+    selectedFilter,
+    searchedText,
+  };
 };

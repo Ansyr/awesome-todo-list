@@ -7,7 +7,7 @@ export const useTodos = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const { getTodosList, createTodo, deleteTodo, updateTodo } = useTodosRepo();
 
-  const handleAddTodo = async (text: string) => {
+  const add = async (text: string) => {
     if (text.length) {
       const todo = {
         id: generateUid(),
@@ -21,13 +21,13 @@ export const useTodos = () => {
     }
   };
 
-  const handleDeleteTodo = async (id: string) => {
+  const remove = async (id: string) => {
     await deleteTodo(id);
     const updatedTodos = await getTodosList();
     setTodos(updatedTodos);
   };
 
-  const handleToggleTodo = async (id: string) => {
+  const toggle = async (id: string) => {
     const updatedTodo = todos.find((todo) => todo.id === id);
 
     if (updatedTodo) {
@@ -41,5 +41,5 @@ export const useTodos = () => {
     getTodosList().then((todos) => setTodos(todos));
   }, []);
 
-  return { todos, handleAddTodo, handleDeleteTodo, handleToggleTodo };
+  return { todos, add, remove, toggle };
 };

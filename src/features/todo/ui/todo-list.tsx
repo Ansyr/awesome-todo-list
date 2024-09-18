@@ -35,7 +35,7 @@ export const TodoList = () => {
         <Input
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
-          placeholder={"find todos"}
+          placeholder={"Найти тудушку"}
           className="mt-2 mb-4"
         />
         <div className="flex pt-2 flex-col sm:flex-row sm: gap-2 justify-between items-center">
@@ -50,7 +50,9 @@ export const TodoList = () => {
         </div>
       </div>
       {sortedTodos.length === 0 ? (
-        <div className="text-gray-500">No todos found.</div>
+        <div className="flex justify-center items-center flex-grow">
+          <span className="text-gray-500 text-lg">Нет тудушек :(</span>
+        </div>
       ) : (
         sortedTodos?.map((todo) => (
           <TodoItem

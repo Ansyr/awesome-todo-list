@@ -18,7 +18,7 @@ export const CreateTodoForm = ({
       <Input
         value={addTodoText}
         onChange={(e) => setAddTodoText(e.target.value)}
-        placeholder={"add todo"}
+        placeholder={"Добавить тудушку"}
       />
     </form>
   );

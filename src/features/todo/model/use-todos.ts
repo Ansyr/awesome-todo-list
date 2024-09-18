@@ -8,15 +8,17 @@ export const useTodos = () => {
   const { getTodosList, createTodo, deleteTodo, updateTodo } = useTodosRepo();
 
   const handleAddTodo = async (text: string) => {
-    const todo = {
-      id: generateUid(),
-      text,
-      createdAt: new Date().toISOString(),
-      completed: false,
-    };
-    await createTodo(todo);
-    const updatedTodos = await getTodosList();
-    setTodos(updatedTodos);
+    if (text.length) {
+      const todo = {
+        id: generateUid(),
+        text,
+        createdAt: new Date().toISOString(),
+        completed: false,
+      };
+      await createTodo(todo);
+      const updatedTodos = await getTodosList();
+      setTodos(updatedTodos);
+    }
   };
 
   const handleDeleteTodo = async (id: string) => {

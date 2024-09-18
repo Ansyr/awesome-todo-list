@@ -27,7 +27,7 @@ export const addTodo = (newTodo: AddTodoDto) => {
 };
 
 export const updateTodoById = (id: string, updatedTodo: UpdateTodoDto) => {
-  return api.patch<TodoDto>(`todos/${id}`, updatedTodo);
+  return api.patch(`todos/${id}`, updatedTodo);
 };
 export const deleteTodoById = (id: string) => {
   return api.delete(`todos/${id}`);

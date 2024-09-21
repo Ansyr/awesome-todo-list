@@ -3,7 +3,9 @@ import { useTodosRepo } from "./use-todos-repo.ts";
 import { Todo } from "./domain.ts";
 import { generateUid } from "../../../shared/lib/uuid.ts";
 
-export const useTodos = () => {
+export type TodoProcessor = (todos: Todo[]) => Todo[];
+
+export const useTodos = (processor: TodoProcessor[]) => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const { getTodosList, createTodo, deleteTodo, updateTodo } = useTodosRepo();
 
@@ -37,9 +39,14 @@ export const useTodos = () => {
     }
   };
 
+  const processedTodos = processor.reduce(
+    (todo, processor) => processor(todo),
+    todos,
+  );
+
   useEffect(() => {
     getTodosList().then((todos) => setTodos(todos));
   }, []);
 
-  return { todos, add, remove, toggle };
+  return { processedTodos, add, remove, toggle, todos: processedTodos };
 };

@@ -1,9 +1,11 @@
-import { SortTodo, Todo } from "./domain.ts";
-import { useMemo, useState } from "react";
+import { useState } from "react";
+import { SortTodo } from "./domain.ts";
+import { TodoProcessor } from "./use-todos.ts";
 
-export const useSortedTodos = ({ todos }: { todos: Todo[] }) => {
+export const useTodosSortProcessor = () => {
   const [sortBy, setSortBy] = useState<SortTodo>("date");
-  const sortedTodos = useMemo(() => {
+
+  const sortProcessor: TodoProcessor = (todos) => {
     if (sortBy === "alphabet") {
       return [...todos!].sort((a, b) => a.text.localeCompare(b.text));
     } else {
@@ -12,10 +14,15 @@ export const useSortedTodos = ({ todos }: { todos: Todo[] }) => {
           new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
       );
     }
-  }, [todos, sortBy]);
+  };
 
   const changeSort = (sort: SortTodo) => {
     setSortBy(sort);
   };
-  return { sortedTodos, sortBy, changeSort };
+
+  return {
+    processor: sortProcessor,
+    changeSort,
+    sort: sortBy,
+  };
 };
